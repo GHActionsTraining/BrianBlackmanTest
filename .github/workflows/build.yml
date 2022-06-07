@@ -1,0 +1,17 @@
+name: Build
+
+on: workflow_dispatch #[push, pull_request]
+
+jobs:
+  build:
+
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Restore dependencies
+      run: dotnet restore \src
+    - name: Build
+      run: dotnet build --no-restore \src
+    - name: Test
+      run: dotnet test --no-build --verbosity normal \src

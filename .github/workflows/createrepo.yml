@@ -1,0 +1,25 @@
+name: Create repo from template
+
+env:
+  OWNER: ${{ github.repository_owner }}
+  REPO: ${{ github.event.repository.name }}
+  
+
+on:
+  workflow_dispatch:
+    inputs:
+      reponame:
+        description: 'Name for Repository'
+        required: true
+        default: 'TestRepo'
+      owner:
+        description: 'Owner for Repository'
+        required: true
+        default: 'brian-blackman_ecolab'
+jobs:
+  createrepo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh repo create ECLDigitalDelivery/${{ github.event.inputs.reponame }} --template ECLDigitalDelivery/BrianBlackmanTest --internal
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
