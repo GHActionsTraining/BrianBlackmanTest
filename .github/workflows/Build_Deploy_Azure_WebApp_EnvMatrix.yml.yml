@@ -55,10 +55,11 @@ jobs:
           path: publish
 
   deploy:
-    runs-on: ${{ matrix.os }}   strategy:
-    matrix:
-      os: [ubuntu-latest, windows-latest]
-      environment: [Development, Test]
+    runs-on: ${{ matrix.os }}   
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        environment: [Development, Test]
 
     needs: build
     environment:
