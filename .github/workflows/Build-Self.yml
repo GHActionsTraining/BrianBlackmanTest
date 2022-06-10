@@ -1,4 +1,4 @@
-name: Build
+name: Build-Self
 
 on: workflow_dispatch #[push, pull_request]
 
