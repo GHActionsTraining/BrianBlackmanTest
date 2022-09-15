@@ -24,7 +24,7 @@ on:
 #        use in workflow: '${{ github.event.inputs.webappname }}'
 
 jobs:
-  build:
+  build1:
     runs-on: ubuntu-latest
 
     steps:
