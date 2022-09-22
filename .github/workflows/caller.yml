@@ -1,0 +1,22 @@
+name: Caller
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  called_build_workflow_job:
+    uses: GHActionsTraining/BrianBlackmanTest/.github/workflows/called_build.yml@main
+    with: 
+      configuration: 'Release'
+
+  called_deploy_workflow_job:
+    uses: GHActionsTraining/BrianBlackmanTest/.github/workflows/called_deploy.yml@main
+    with: 
+      deployapp: true
+    needs: called_build_workflow_job
+
+    
