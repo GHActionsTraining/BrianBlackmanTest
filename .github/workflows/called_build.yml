@@ -6,7 +6,7 @@ on:
   workflow_call:
     inputs:
       configuration:
-        default: "Release"
+        default: 'Release'
         required: true
         type: string
 jobs:
