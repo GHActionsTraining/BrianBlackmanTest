@@ -10,14 +10,15 @@ on:
       deployapp:
         description: 'Deploy App'
         required: true
-        default: 'false'
+        type: boolean
+        default: false
    
   workflow_dispatch:
     inputs:
       deployapp:
         description: 'Deploy App'
         required: true
-        default: 'false'
+        default: false
         
 jobs:
   deploy_webapp:
