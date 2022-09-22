@@ -2,7 +2,11 @@ name: Called workflow - Build
 
 on: 
   workflow_dispatch:
-  #[push, pull_request]
+    inputs:
+      configuration:
+        default: 'Release'
+        required: true
+        type: string
   workflow_call:
     inputs:
       configuration:
