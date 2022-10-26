@@ -11,7 +11,7 @@ jobs:
     name: A job1 to say hello
     steps:
       - id: hello-world
-        uses: ./.github/actions/hello-world-composite-action
+        uses: .github/actions/myaction@main
         with:
           who-to-greet: 'Hello from GH ABCs'
       - run: echo random-number ${{ steps.hello-world.outputs.random-number }}
