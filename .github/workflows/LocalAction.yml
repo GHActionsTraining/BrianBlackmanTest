@@ -1,6 +1,6 @@
 
 
-name: 05-2. Hello World Composite
+name: LocalAction
 
 on: 
   [workflow_dispatch]
