@@ -20,6 +20,6 @@ jobs:
   createrepo:
     runs-on: ubuntu-latest
     steps:
-      - run: gh repo create ${{ github.event.inputs.reponame }}
+      - run: gh repo create ${{ github.event.inputs.reponame }} --public 
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
