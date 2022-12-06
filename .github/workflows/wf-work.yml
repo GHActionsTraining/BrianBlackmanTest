@@ -5,10 +5,15 @@ on:
     workflows: [ "Workflow Main" ]
     types:
       - completed
+      - inprogress
+      - requested
   workflow_dispatch:
  
 jobs:
   work:
+  
+ # if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+  
     name: Some Workflow Work
     runs-on: ubuntu-latest
     steps:
