@@ -9,7 +9,7 @@ jobs:
     name: Hello
     steps:
       - id: hello-world
-        uses: GHActionsTraining/.github/actions/myaction
+        uses: GHActionsTraining/.github/actions/myaction@main
         with:
           who-to-greet: 'Hello from GH ABCs'
       - run: echo random-number ${{ steps.hello-world.outputs.random-number }}
