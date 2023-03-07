@@ -6,15 +6,15 @@ env:
   DOTNET_VERSION: '6'                 # set this to the .NET Core version to use
 #  PROJECT_PATH: '/src/brianblackmantest'
 on:
-#  push:
-#    branches:
-#      - main
-  workflow_dispatch:
-    inputs:
-      deployapp:
-        description: 'Deploy App'
-        required: true
-        default: 'false'
+ push:
+   branches:
+     - main
+ workflow_dispatch:
+  inputs:
+    deployapp:
+      description: 'Deploy App'
+      required: true
+      default: 'false'
         
 #      webappname:
 #        description: 'Web App Name'
