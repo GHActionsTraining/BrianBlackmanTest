@@ -1,0 +1,13 @@
+name: Alias
+
+#Calling YAML file:
+name: My Workflow
+
+on: [workflow_dispatch]
+
+env:
+  <<: *template.yml
+
+jobs:
+  my-job:
+    <<: *template.yml.jobs.my-job
