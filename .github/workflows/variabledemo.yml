@@ -1,5 +1,5 @@
 name: Demo Variables in GitHub Actions
-on: [push]
+on: workflow_dispatch
 
 jobs:
   demo_variables:
