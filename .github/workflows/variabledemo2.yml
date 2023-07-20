@@ -13,7 +13,7 @@ jobs:
       - name: Set up variables
         run: |
           echo "env.VARIABLE_1=${{ env.VARIABLE_1 }}"
-          env.VARIABLE_1 = "GoodBye"
+          echo "GoodBye! >> env.VARIABLE_1"
  
           VARIABLE_1="Hello, world!"
           VARIABLE_2=${{ github.event.repository.name }}
