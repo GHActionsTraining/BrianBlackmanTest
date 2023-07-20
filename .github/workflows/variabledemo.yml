@@ -1,6 +1,8 @@
 name: Demo Variables in GitHub Actions
 on: workflow_dispatch
 
+env:
+  VARIABLE_1: "Hi!"
 jobs:
   demo_variables:
     runs-on: ubuntu-latest
@@ -10,6 +12,7 @@ jobs:
       
       - name: Set up variables
         run: |
+          echo "VARIABLE_1=${VARIABLE_1}"
           VARIABLE_1="Hello, world!"
           VARIABLE_2=${{ github.event.repository.name }}
           echo "VARIABLE_1=${VARIABLE_1}"
