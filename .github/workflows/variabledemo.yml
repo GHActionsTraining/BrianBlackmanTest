@@ -25,103 +25,103 @@ jobs:
           echo "VARIABLE_1=${{ env.VARIABLE_1 }}"
           echo "VARIABLE_2=${{ env.VARIABLE_2 }}"
 
-# In this example, we have defined two variables (VARIABLE_1 and VARIABLE_2) and
-# have set their values in the Set up variables step. We are then using echo 
-# to display the values of these variables and are also using the ::set-env command
-# to set these values as environment variables.
-# In the Use variables step, we are using echo again to display the values of 
-# the VARIABLE_1 and VARIABLE_2 environment variables that we set earlier.
-# When you run this workflow, you should see the values of the two variables
-# in the output of the Set up variables step and then again in the output of
-# the Use variables step.
-# Note that the ::set-env command is deprecated and you should use the
-# env key instead to set environment variables. 
-# Here's how you can modify the Set up variables step to use the env key instead:
+# # In this example, we have defined two variables (VARIABLE_1 and VARIABLE_2) and
+# # have set their values in the Set up variables step. We are then using echo 
+# # to display the values of these variables and are also using the ::set-env command
+# # to set these values as environment variables.
+# # In the Use variables step, we are using echo again to display the values of 
+# # the VARIABLE_1 and VARIABLE_2 environment variables that we set earlier.
+# # When you run this workflow, you should see the values of the two variables
+# # in the output of the Set up variables step and then again in the output of
+# # the Use variables step.
+# # Note that the ::set-env command is deprecated and you should use the
+# # env key instead to set environment variables. 
+# # Here's how you can modify the Set up variables step to use the env key instead:
 
-      - name: Set up variables
-        run: |
-          echo "VARIABLE_1='Hello, world!'" >> $GITHUB_ENV
-          echo "VARIABLE_2=${{ github.event.repository.name }}" >> $GITHUB_ENV
+#       - name: Set up variables
+#         run: |
+#           echo "VARIABLE_1='Hello, world!'" >> $GITHUB_ENV
+#           echo "VARIABLE_2=${{ github.event.repository.name }}" >> $GITHUB_ENV
 
 
-# With this modification, the VARIABLE_1 and VARIABLE_2 environment variables 
-# will be set correctly and can be accessed using ${{ env.VARIABLE_1 }} and 
-# ${{ env.VARIABLE_2 }} in the Use variables step.
+# # With this modification, the VARIABLE_1 and VARIABLE_2 environment variables 
+# # will be set correctly and can be accessed using ${{ env.VARIABLE_1 }} and 
+# # ${{ env.VARIABLE_2 }} in the Use variables step.
 
-# Here's an example of how to create a variable in a repository using the GitHub REST API:
-curl -X POST \
-  -H "Authorization: token YOUR_ACCESS_TOKEN" \
-  -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/OWNER/REPO/actions/secrets/NAME \
-  -d '{"encrypted_value": "ENCRYPTED_VALUE", "key_id": "KEY_ID"}'
+# # Here's an example of how to create a variable in a repository using the GitHub REST API:
+# curl -X POST \
+#   -H "Authorization: token YOUR_ACCESS_TOKEN" \
+#   -H "Accept: application/vnd.github.v3+json" \
+#   https://api.github.com/repos/OWNER/REPO/actions/secrets/NAME \
+#   -d '{"encrypted_value": "ENCRYPTED_VALUE", "key_id": "KEY_ID"}'
 
-# Replace YOUR_ACCESS_TOKEN, OWNER, REPO, NAME, ENCRYPTED_VALUE, and KEY_ID with your own values. This will create a new secret variable with the given name and encrypted value in the specified repository.
-# To retrieve the value of a secret variable, you can make a GET request to the following endpoint:
-curl -X GET \
-  -H "Authorization: token YOUR_ACCESS_TOKEN" \
-  -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/OWNER/REPO/actions/secrets/NAME
+# # Replace YOUR_ACCESS_TOKEN, OWNER, REPO, NAME, ENCRYPTED_VALUE, and KEY_ID with your own values. This will create a new secret variable with the given name and encrypted value in the specified repository.
+# # To retrieve the value of a secret variable, you can make a GET request to the following endpoint:
+# curl -X GET \
+#   -H "Authorization: token YOUR_ACCESS_TOKEN" \
+#   -H "Accept: application/vnd.github.v3+json" \
+#   https://api.github.com/repos/OWNER/REPO/actions/secrets/NAME
   
-# This will return a JSON response containing the value of the secret variable.
-# To update the value of a secret variable, you can make a PUT request to the following endpoint:
+# # This will return a JSON response containing the value of the secret variable.
+# # To update the value of a secret variable, you can make a PUT request to the following endpoint:
 
-curl -X PUT \
-  -H "Authorization: token YOUR_ACCESS_TOKEN" \
-  -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/OWNER/REPO/actions/secrets/NAME \
-  -d '{"encrypted_value": "NEW_ENCRYPTED_VALUE", "key_id": "KEY_ID"}'
+# curl -X PUT \
+#   -H "Authorization: token YOUR_ACCESS_TOKEN" \
+#   -H "Accept: application/vnd.github.v3+json" \
+#   https://api.github.com/repos/OWNER/REPO/actions/secrets/NAME \
+#   -d '{"encrypted_value": "NEW_ENCRYPTED_VALUE", "key_id": "KEY_ID"}'
   
-# This will update the value of the secret variable with the given name in the specified repository
+# # This will update the value of the secret variable with the given name in the specified repository
 
 
-# You can set up variables in a YAML template that can be included in your calling YAML 
-# by using YAML anchors and aliases.
+# # You can set up variables in a YAML template that can be included in your calling YAML 
+# # by using YAML anchors and aliases.
 
-env:
-  MY_VAR: &my-var "Hello World"
-# In this template YAML file, we're defining an environment variable named MY_VAR 
-# using an anchor &my-var. The value of the variable is set to "Hello World".
+# env:
+#   MY_VAR: &my-var "Hello World"
+# # In this template YAML file, we're defining an environment variable named MY_VAR 
+# # using an anchor &my-var. The value of the variable is set to "Hello World".
 
-# Calling YAML file:
-name: My Workflow
+# # Calling YAML file:
+# name: My Workflow
 
-on: [push]
+# on: [push]
 
-env:
-  <<: *my-template.yml
-#In this calling YAML file, we're including the my-template.yml file using an alias
-# *my-template.yml in the env section of the workflow. This will include the MY_VAR
-# environment variable from the template YAML file in the calling YAML file.
-#Note that the << syntax is used to merge the contents of the included YAML file 
-# with the current file. In this case, we're merging the contents of the 
-# my-template.yml file with the env section of the calling YAML file.
-# You can also include other sections of the YAML file using YAML anchors and aliases. 
+# env:
+#   <<: *my-template.yml
+# #In this calling YAML file, we're including the my-template.yml file using an alias
+# # *my-template.yml in the env section of the workflow. This will include the MY_VAR
+# # environment variable from the template YAML file in the calling YAML file.
+# #Note that the << syntax is used to merge the contents of the included YAML file 
+# # with the current file. In this case, we're merging the contents of the 
+# # my-template.yml file with the env section of the calling YAML file.
+# # You can also include other sections of the YAML file using YAML anchors and aliases. 
 
-#Template YAML file (my-template.yml):
-env:
-  MY_VAR: &my-var "Hello World"
+# #Template YAML file (my-template.yml):
+# env:
+#   MY_VAR: &my-var "Hello World"
 
-jobs:
-  my-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Step 1
-        run: echo "Step 1"
-      - name: Step 2
-        run: echo "Step 2"
+# jobs:
+#   my-job:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Step 1
+#         run: echo "Step 1"
+#       - name: Step 2
+#         run: echo "Step 2"
 
-#Calling YAML file:
-name: My Workflow
+# #Calling YAML file:
+# name: My Workflow
 
-on: [push]
+# on: [push]
 
-env:
-  <<: *my-template.yml
+# env:
+#   <<: *my-template.yml
 
-jobs:
-  my-job:
-    <<: *my-template.yml.jobs.my-job
-# In this example, we're including the entire jobs section of the template YAML 
-# file in the my-job job of the calling YAML file using YAML anchors and aliases.
-# This will include the runs-on and steps sections of the template YAML file in
-# the my-job job of the calling YAML file
+# jobs:
+#   my-job:
+#     <<: *my-template.yml.jobs.my-job
+# # In this example, we're including the entire jobs section of the template YAML 
+# # file in the my-job job of the calling YAML file using YAML anchors and aliases.
+# # This will include the runs-on and steps sections of the template YAML file in
+# # the my-job job of the calling YAML file
