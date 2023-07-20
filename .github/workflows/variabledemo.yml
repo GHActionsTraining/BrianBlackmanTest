@@ -17,13 +17,13 @@ jobs:
           VARIABLE_2=${{ github.event.repository.name }}
           echo "VARIABLE_1=${VARIABLE_1}"
           echo "VARIABLE_2=${VARIABLE_2}"
-          echo "::set-env name=VARIABLE_1::${VARIABLE_1}"
-          echo "::set-env name=VARIABLE_2::${VARIABLE_2}"
+#          echo "::set-env name=VARIABLE_1::${VARIABLE_1}"
+#          echo "::set-env name=VARIABLE_2::${VARIABLE_2}"
       
-      - name: Use variables
-        run: |
-          echo "VARIABLE_1=${{ env.VARIABLE_1 }}"
-          echo "VARIABLE_2=${{ env.VARIABLE_2 }}"
+#       - name: Use variables
+#         run: |
+#           echo "VARIABLE_1=${{ env.VARIABLE_1 }}"
+#           echo "VARIABLE_2=${{ env.VARIABLE_2 }}"
 
 # # In this example, we have defined two variables (VARIABLE_1 and VARIABLE_2) and
 # # have set their values in the Set up variables step. We are then using echo 
