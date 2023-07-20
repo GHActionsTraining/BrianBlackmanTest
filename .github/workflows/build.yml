@@ -7,6 +7,13 @@ on:
 jobs:
   build:
 
+    permissions:
+      contents: write
+      actions: read
+      issues: write
+
+      
+  
     name: Build
     runs-on: ubuntu-latest
     steps:
