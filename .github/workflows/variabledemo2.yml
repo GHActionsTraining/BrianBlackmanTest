@@ -15,8 +15,8 @@ jobs:
           echo "env.VARIABLE_1=${{ env.VARIABLE_1 }}"
           echo "GoodBye! >> env.VARIABLE_1"
  
-          VARIABLE_1="Hello, world!"
+          #VARIABLE_1="Hello, world!"
           VARIABLE_2=${{ github.event.repository.name }}
-          echo "VARIABLE_1=${env.VARIABLE_1}"
+          #echo "VARIABLE_1=${env.VARIABLE_1}"
           echo "env.VARIABLE_1=${{ env.VARIABLE_1 }}"
           echo "VARIABLE_2=${VARIABLE_2}"
