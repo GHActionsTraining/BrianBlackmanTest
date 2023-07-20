@@ -6,16 +6,12 @@ on:
 
 jobs:
   build:
-
+    name: Build
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       actions: read
       issues: write
-
-      
-  
-    name: Build
-    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Restore dependencies
