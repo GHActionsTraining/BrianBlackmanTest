@@ -1,4 +1,4 @@
-name: Build and deploy ASP.Net Core app to an Azure Web App using GH Environment
+name: Build/Deploy app to Azure/GH Environment
 
 env:
   AZURE_WEBAPP_NAME: BrianBlackmanTest     # set this to the name of your Azure Web App
@@ -40,19 +40,18 @@ jobs:
         with:
           path: ~/.nuget/packages
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget-
+
       - name: Build with dotnet
         run: dotnet build \src --configuration Release
 
       - name: dotnet publish
         run: dotnet publish \src -c Release -o publish
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
-        with:
-          name: .net-app
-          path: publish
+#       - name: Upload artifact for deployment job
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: .net-app
+#           path: publish
 
   deploy1:
     runs-on: ubuntu-latest
@@ -62,11 +61,18 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - if: github.event.inputs.deployapp == 'true'
-        name: Download artifact from build job
-        uses: actions/download-artifact@v3
+      - name: Set up dependency caching for faster builds
+        uses: actions/cache@v3
         with:
-          name: .net-app
+          path: ~/.nuget/packages
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+    
+#       - if: github.event.inputs.deployapp == 'true'
+#         name: Download artifact from build job
+#         uses: actions/download-artifact@v3
+#         with:
+#           name: .net-app
 
       - if: github.event.inputs.deployapp == 'true'
         name: Deploy to Azure Web App
