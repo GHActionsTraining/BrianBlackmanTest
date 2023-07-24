@@ -35,13 +35,13 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Set up dependency caching for faster builds
-        uses: actions/cache@v3
-        with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-          restore-keys: |
-           ${{ runner.os }}-nuget-
+#       - name: Set up dependency caching for faster builds
+#         uses: actions/cache@v3
+#         with:
+#           path: ~/.nuget/packages
+#           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+#           restore-keys: |
+#            ${{ runner.os }}-nuget-
 
       - name: Build with dotnet
         run: dotnet build \src --configuration Release
@@ -68,20 +68,20 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-#       - if: github.event.inputs.deployapp == 'true'
-#         name: Download artifact from build job
-#         uses: actions/download-artifact@v3
-#         with:
-#           name: .net-app
-
-      - name: Retrieve from Cache
-        uses: actions/cache@v3
+      - if: github.event.inputs.deployapp == 'true'
+        name: Download artifact from build job
+        uses: actions/download-artifact@v3
         with:
-          path: |
-            ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-          restore-keys: |
-              ${{ runner.os }}-nuget-
+          name: .net-app
+
+#       - name: Retrieve from Cache
+#         uses: actions/cache@v3
+#         with:
+#           path: |
+#             ~/.nuget/packages
+#           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+#           restore-keys: |
+#               ${{ runner.os }}-nuget-
 
       - if: github.event.inputs.deployapp == 'true'
         name: Deploy to Azure Web App
