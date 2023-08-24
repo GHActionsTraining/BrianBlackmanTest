@@ -16,19 +16,19 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   
-    - name: 'Run Azure CLI commands'
-      run: |
-          az account show
-          az group list
-          pwd
+    # - name: 'Run Azure CLI commands'
+    #   run: |
+    #       az account show
+    #       az group list
+    #       pwd
 
     - name: GitHub Script
       uses: actions/github-script@v2.1.0
       with:
           # The script to run
-          script: gggdfsgdfs
+          script: https://appsvcapims.azurewebsites.net/api/Todo
           # The GitHub token used to create an authenticated client
-          github-token: GITHUB_TOKEN
+          #github-token: GITHUB_TOKEN
           # optional, default is ${{ github.token }}
           # Whether to tell the GitHub client to log details of its requests
           debug: false
