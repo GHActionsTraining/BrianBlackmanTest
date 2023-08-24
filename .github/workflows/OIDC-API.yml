@@ -1,4 +1,4 @@
-name: Azure OpenID Connect
+name: Azure OIDC API
 on: workflow_dispatch
 
 permissions:
