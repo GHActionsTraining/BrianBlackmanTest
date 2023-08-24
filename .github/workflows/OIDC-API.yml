@@ -21,22 +21,9 @@ jobs:
     #       az account show
     #       az group list
     #       pwd
-
-    - name: GitHub Script
-      uses: actions/github-script@v2.1.0
-      with:
-          # The script to run
-          script: https://appsvcapims.azurewebsites.net/api/Todo
-          # The GitHub token used to create an authenticated client
-          #github-token: GITHUB_TOKEN
-          # optional, default is ${{ github.token }}
-          # Whether to tell the GitHub client to log details of its requests
-          debug: false
-          # optional
-          # An optional user-agent string
-          user-agent: actions/github-script
-          # optional, default is actions/github-script
-          # A comma-separated list of API previews to accept
-          #previews: # optional
-          # Either "string" or "json" (default "json")—how the result will be encoded
-          #result-encoding: # optional, default is json
+    
+    - name: Call Azure Web App API
+      run: |
+       API_URL="https://appsvcapims.azurewebsites.net/api/Todo"
+       RESPONSE=$(curl -s "$API_URL")
+       echo "API Response: $RESPONSE"
