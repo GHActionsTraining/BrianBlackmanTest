@@ -1,3 +1,10 @@
+---
+name: PR1 issue
+about: Use this template for tracking new features.
+title: "[DATE]: [FEATURE NAME]"
+labels: tracking issue, needs triage
+assignees: octocat
+---
 THIS PROJECT IS IN MAINTENANCE MODE. We accept pull-requests for Bug Fixes **ONLY**. NO NEW FEATURES ACCEPTED!
 
 <!--- Provide a general summary of your changes in the Title above -->
