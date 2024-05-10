@@ -47,11 +47,11 @@ jobs:
       - name: dotnet publish
         run: dotnet publish \src -c Release -o publish
 
-#       - name: Upload artifact for deployment job
-#         uses: actions/upload-artifact@v3
-#         with:
-#           name: .net-app
-#           path: publish
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: .net-app
+          path: publish
 
   deploy1:
     runs-on: ubuntu-latest
