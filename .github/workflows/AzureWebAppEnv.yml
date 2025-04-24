@@ -9,12 +9,12 @@ on:
 #  push:
 #    branches:
 #      - main
-workflow_dispatch:
-  inputs:
-    deployapp:
-      description: 'Deploy App'
-      required: true
-      default: 'false'
+  workflow_dispatch:
+    inputs:
+      deployapp:
+        description: 'Deploy App'
+        required: true
+        default: 'false'
         
 #      webappname:
 #        description: 'Web App Name'
