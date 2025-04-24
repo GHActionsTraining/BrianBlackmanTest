@@ -3,7 +3,7 @@ name: Build and deploy ASP.Net Core app to an Azure Web App using GH Environment
 env:
   AZURE_WEBAPP_NAME: BrianBlackmanTest     # set this to the name of your Azure Web App
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '8.0.15'                 # set this to the .NET Core version to use
+  DOTNET_VERSION: '8.0.408'                 # set this to the .NET Core version to use
 #  PROJECT_PATH: '/src/brianblackmantest'
 on:
 #  push:
