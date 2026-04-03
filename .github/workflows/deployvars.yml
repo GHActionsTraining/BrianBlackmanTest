@@ -1,5 +1,5 @@
 # Caller workflow that imports variables from variables.yml
-name: Deploy
+name: Deploy Variables
 
 on:
 #  push:
