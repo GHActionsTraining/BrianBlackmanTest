@@ -1,0 +1,36 @@
+# Reusable workflow that defines shared variables.
+# Called by other workflows via `uses:`.
+name: Shared Variables
+
+on:
+  workflow_call:
+    outputs:
+      app_name:
+        description: "Application name"
+        value: ${{ jobs.set-variables.outputs.app_name }}
+      environment:
+        description: "Target environment"
+        value: ${{ jobs.set-variables.outputs.environment }}
+      registry:
+        description: "Container registry URL"
+        value: ${{ jobs.set-variables.outputs.registry }}
+      image_tag:
+        description: "Docker image tag"
+        value: ${{ jobs.set-variables.outputs.image_tag }}
+
+jobs:
+  set-variables:
+    runs-on: ubuntu-latest
+    outputs:
+      app_name: ${{ steps.vars.outputs.app_name }}
+      environment: ${{ steps.vars.outputs.environment }}
+      registry: ${{ steps.vars.outputs.registry }}
+      image_tag: ${{ steps.vars.outputs.image_tag }}
+    steps:
+      - name: Define variables
+        id: vars
+        run: |
+          echo "app_name=my-demo-app" >> "$GITHUB_OUTPUT"
+          echo "environment=staging" >> "$GITHUB_OUTPUT"
+          echo "registry=ghcr.io/myorg" >> "$GITHUB_OUTPUT"
+          echo "image_tag=v1.2.3" >> "$GITHUB_OUTPUT"
