@@ -1,0 +1,40 @@
+# Caller workflow that imports variables from variables.yml
+name: Deploy
+
+on:
+#  push:
+#    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  # 1) Call the reusable workflow to load variables
+  load-variables:
+    uses: ./.github/workflows/variables.yml
+
+  # 2) Build job — consumes variables from the reusable workflow
+  build:
+    needs: load-variables
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Print variables from included YAML
+        run: |
+          echo "App Name:    ${{ needs.load-variables.outputs.app_name }}"
+          echo "Environment: ${{ needs.load-variables.outputs.environment }}"
+          echo "Registry:    ${{ needs.load-variables.outputs.registry }}"
+          echo "Image Tag:   ${{ needs.load-variables.outputs.image_tag }}"
+
+      - name: Build image
+        run: |
+          echo "Building ${{ needs.load-variables.outputs.registry }}/${{ needs.load-variables.outputs.app_name }}:${{ needs.load-variables.outputs.image_tag }}"
+
+  # 3) Deploy job — also consumes the same shared variables
+  deploy:
+    needs: [load-variables, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to environment
+        run: |
+          echo "Deploying ${{ needs.load-variables.outputs.app_name }} to ${{ needs.load-variables.outputs.environment }}"
+          echo "Image: ${{ needs.load-variables.outputs.registry }}/${{ needs.load-variables.outputs.app_name }}:${{ needs.load-variables.outputs.image_tag }}"
